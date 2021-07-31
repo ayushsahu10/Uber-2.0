@@ -1,6 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
+import { Icon } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const data = [
   {
@@ -19,19 +23,54 @@ const data = [
 ];
 
 const navOptions = () => {
+  const navigation = useNavigation();
+
   return (
     <FlatList
       data={data}
       keyExtractor={(item) => item.id}
       horizontal
       renderItem={({ item }) => (
-        <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(item.screen)}
+          style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`}
+        >
           <View>
             <Image
               style={{ width: 120, height: 120, resizeMode: "contain" }}
               source={{ uri: item.Image }}
             />
             <Text style={tw`mt-2 text-lg font-bold`}>{item.title}</Text>
+            {/* <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name="arrowright"
+              color="white"
+              type="antdesign"
+              // caretrightoutlined
+            /> */}
+
+            {/* <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name="rightcircletwotone"
+              color="white"
+              type="antdesign"
+            />
+            <Icon
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name="rowing"
+            /> */}
+            {/* <Ionicons
+              style={tw`p-2 bg-black rounded-full w-10 mt-4`}
+              name="md-checkmark-circle"
+              size={32}
+              color="white"
+            /> */}
+            <AntDesign
+              style={tw`p-2  mt-4`}
+              name="rightcircle"
+              size={40}
+              color="black"
+            />
           </View>
         </TouchableOpacity>
       )}
